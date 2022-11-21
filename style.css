@@ -4,8 +4,44 @@
   margin: 0;
 }
 
+#container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 #page-title {
-  padding: 0 0 1% 9%;
+  padding: 3%;
+  align-self: center;
+}
+
+#music-search {
+  display: inline-flex;
+  flex-direction: row;
+  width: 95%;
+}
+
+#search-bar-field {
+  align-self: left;
+  width: 75%;
+}
+
+#search-bar {
+  border: 2px solid black;
+  align-self: left;
+  width: 100%;
+  padding-left: 2%;
+}
+
+#submit-field {
+  align-self: right;
+  justify-self: center;
+  width: 30%;
+}
+
+#results-header {
+  align-self: left;
+  width: 98%;
 }
 
 #search-results {

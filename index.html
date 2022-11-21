@@ -4,9 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
-    />
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
     <link rel="stylesheet" href="style.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="main.js" defer></script>
@@ -15,7 +14,17 @@
   <body id="container">
     <h2 id="page-title">Jerome's Music Page</h2>
     <div id="music-player"></div>
-    <div id="search-bar"></div>
-    <div id="search-results" class="results"></div>
+    <form id="music-search">
+    <div id="search-bar-field">
+      <label></label>
+      <input id="search-bar" type="text" placeholder="Search for Cool Music"></input>
+    </div>
+    <div id="submit-field">
+      <button id="submit-button" type="submit">Search</button></div>
+  </form>
+  <div id="results-header">
+    <h6>Search Results:</h6>
+  </div>
+  <div id="search-results" class="results"></div>
   </body>
 </html>
