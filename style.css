@@ -1,0 +1,22 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+#page-title {
+  padding: 0 0 1% 9%;
+}
+
+#search-results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 18rem;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
