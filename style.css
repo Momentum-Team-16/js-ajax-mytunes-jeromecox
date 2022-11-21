@@ -23,7 +23,8 @@
 
 #search-bar-field {
   align-self: left;
-  width: 75%;
+  width: 90%;
+  padding-right: 5%;
 }
 
 #search-bar {
@@ -31,12 +32,6 @@
   align-self: left;
   width: 100%;
   padding-left: 2%;
-}
-
-#submit-field {
-  align-self: right;
-  justify-self: center;
-  width: 30%;
 }
 
 #results-header {
