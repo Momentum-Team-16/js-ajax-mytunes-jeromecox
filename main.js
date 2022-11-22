@@ -18,20 +18,34 @@ function makeCard(song) {
   thumb.appendChild(pic);
   card.appendChild(thumb);
 
-  let track = document.createElement("div");
-  track.classList.add("card-content");
-  let trackTitle = song.trackName;
+  let content = document.createElement("div");
+  content.classList.add("card-content");
+  content.classList.add("large");
 
-  card.appendChild(track);
+  let track = document.createElement("div");
+  track.classList.add("track-name");
+  let trackTitle = song.trackName;
+  track.innerText = trackTitle;
+
+  content.appendChild(track);
 
   let name = document.createElement("div");
-  name.classList.add("card-title");
+  name.classList.add("artist-name");
   let artName = song.artistName;
   name.innerText = artName;
 
-  card.appendChild(name);
+  content.appendChild(name);
+  card.appendChild(content);
 
   searchResults.appendChild(card);
+
+  let audioDiv = document.querySelector("#audio");
+  let nowPlay = document.querySelector("#nowPlay");
+
+  card.addEventListener("click", function (event) {
+    audioDiv.src = song.previewUrl;
+    nowPlay.innerHTML = `Now playing: "${song.trackName}" by ${song.artistName}`;
+  });
 }
 
 function getItunesData(term) {
@@ -65,3 +79,6 @@ page.addEventListener("submit", function (event) {
 
   getItunesData(searchValue);
 });
+
+// maybe move this inside card function?
+// card.addEventListener("click", function (event) {});
