@@ -4,7 +4,6 @@ const searchResults = document.querySelector("#search-results");
 function makeCard(song) {
   let card = document.createElement("div");
   card.classList.add("card");
-  card.classList.add("small");
   card.classList.add("col");
   card.classList.add("s12");
   card.classList.add("m9");
@@ -20,12 +19,12 @@ function makeCard(song) {
 
   let content = document.createElement("div");
   content.classList.add("card-content");
-  content.classList.add("large");
+  content.classList.add("small");
 
   let track = document.createElement("div");
   track.classList.add("track-name");
   let trackTitle = song.trackName;
-  track.innerText = trackTitle;
+  track.innerText = `"${trackTitle}"`;
 
   content.appendChild(track);
 
@@ -49,7 +48,8 @@ function makeCard(song) {
 }
 
 function getItunesData(term) {
-  let url = "https://itunes.apple.com/search?term=" + term + "&limit=24";
+  let url =
+    "https://itunes.apple.com/search?term=" + term + "&limit=24&entity=song";
   console.log(url);
 
   fetch(url, {
@@ -73,12 +73,18 @@ function getItunesData(term) {
 page.addEventListener("submit", function (event) {
   event.preventDefault();
 
-  const searchInput = document.querySelector("#search-bar").value;
+  const searchBar = document.querySelector("#search-bar");
+  const searchInput = searchBar.value;
   const searchValue = encodeURIComponent(searchInput);
   console.log(`Search: ${searchValue}`);
 
-  getItunesData(searchValue);
+  if (searchValue === "") {
+    searchBar.setCustomValidity("Please enter cool music to search");
+    searchBar.reportValidity();
+  } else {
+    while (searchResults.firstChild) {
+      searchResults.removeChild(searchResults.firstChild);
+    }
+    getItunesData(searchValue);
+  }
 });
-
-// maybe move this inside card function?
-// card.addEventListener("click", function (event) {});
