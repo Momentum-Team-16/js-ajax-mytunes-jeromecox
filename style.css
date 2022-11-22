@@ -11,7 +11,7 @@
 }
 
 #page-title {
-  padding: 3%;
+  padding: 3% 3% 2% 3%;
   align-self: center;
 }
 
@@ -19,6 +19,7 @@
   display: inline-flex;
   flex-direction: row;
   width: 95%;
+  padding-top: 2%;
 }
 
 #search-bar-field {
