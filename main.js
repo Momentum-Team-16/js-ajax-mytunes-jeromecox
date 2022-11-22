@@ -4,10 +4,6 @@ const searchResults = document.querySelector("#search-results");
 function makeCard(song) {
   let card = document.createElement("div");
   card.classList.add("card", "col", "s12", "m9", "l4");
-  // card.classList.add("col");
-  // card.classList.add("s12");
-  // card.classList.add("m9");
-  // card.classList.add("l4");
 
   let thumb = document.createElement("div");
   thumb.classList.add("card-image");
