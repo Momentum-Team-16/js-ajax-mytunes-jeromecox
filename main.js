@@ -77,9 +77,7 @@ page.addEventListener("submit", function (event) {
     searchBar.setCustomValidity("Please enter cool music to search");
     searchBar.reportValidity();
   } else {
-    while (searchResults.firstChild) {
-      searchResults.removeChild(searchResults.firstChild);
-    }
+    searchResults.replaceChildren();
     getItunesData(searchValue);
   }
 });
