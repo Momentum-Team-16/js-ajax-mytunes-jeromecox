@@ -1,5 +1,6 @@
 const searchForm = document.querySelector("#music-search");
 const searchResults = document.querySelector("#search-results");
+const musicPlayer = document.querySelector("#music-player");
 
 searchForm.addEventListener("submit", function (event) {
   event.preventDefault();
@@ -14,51 +15,52 @@ searchForm.addEventListener("submit", function (event) {
     searchBar.reportValidity();
   } else {
     searchResults.replaceChildren();
+    musicPlayer.replaceChildren();
     getItunesData(searchValue);
   }
 });
 
+// Helper function to create card elements
+function createCardEl(type, classArray, parent) {
+  let newElement = document.createElement(type);
+  newElement.classList.add(...classArray);
+  parent.appendChild(newElement);
+  return newElement;
+}
+
+// Function to make a card given a song
 function makeCard(song) {
   let card = document.createElement("div");
   card.classList.add("card", "col", "s12", "m9", "l4");
 
-  let thumb = document.createElement("div");
-  thumb.classList.add("card-image");
-  let pic = document.createElement("img");
+  let pic = createCardEl("img", ["card-image"], card);
   pic.src = song.artworkUrl100;
 
-  thumb.appendChild(pic);
-  card.appendChild(thumb);
-
-  let content = document.createElement("div");
-  content.classList.add("card-content", "small");
-
-  let track = document.createElement("div");
-  track.classList.add("track-name");
+  let track = createCardEl("div", ["track-name"], card);
   let trackTitle = song.trackName;
   track.innerText = `"${trackTitle}"`;
 
-  content.appendChild(track);
-
-  let name = document.createElement("div");
-  name.classList.add("artist-name");
+  let name = createCardEl("div", ["artist-name"], card);
   let artName = song.artistName;
   name.innerText = artName;
 
-  content.appendChild(name);
-  card.appendChild(content);
-
   searchResults.appendChild(card);
 
-  let audioDiv = document.querySelector("#audio");
-  let nowPlay = document.querySelector("#nowPlay");
+  // let audioDiv = document.querySelector("#audio");
+  // let nowPlay = document.querySelector("#nowPlay");
 
   card.addEventListener("click", function (event) {
+    musicPlayer.replaceChildren();
+    let audioDiv = createCardEl("audio", ["audio"], musicPlayer);
     audioDiv.src = song.previewUrl;
+    audioDiv.controls = true;
+    audioDiv.autoplay = true;
+    let nowPlay = createCardEl("h6", ["nowPlay"], musicPlayer);
     nowPlay.innerText = `Now playing: "${song.trackName}" by ${song.artistName}`;
   });
 }
 
+// Function to fetch GET from iTunes API
 function getItunesData(term) {
   let url =
     "https://itunes.apple.com/search?term=" + term + "&limit=24&entity=song";
