@@ -81,7 +81,7 @@ function getItunesData(term) {
         searchResults.appendChild(noResults);
         let losingHorn = document.createElement("audio");
         searchResults.appendChild(losingHorn);
-        losingHorn.src = "";
+        losingHorn.src = "The_Price_is_Right_Losing_Horn.mp3";
         losingHorn.autoplay = true;
       } else {
         for (let song of data.results) {
