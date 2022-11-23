@@ -65,6 +65,12 @@
   padding: 2%;
 }
 
+.noResults {
+  font-size: x-large;
+  font-weight: bolder;
+  text-align: center;
+}
+
 .card {
   display: flex;
   flex-direction: column;

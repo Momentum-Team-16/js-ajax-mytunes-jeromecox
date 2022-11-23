@@ -1,6 +1,23 @@
 const page = document.querySelector("#container");
 const searchResults = document.querySelector("#search-results");
 
+page.addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  const searchBar = document.querySelector("#search-bar");
+  const searchInput = searchBar.value;
+  const searchValue = encodeURIComponent(searchInput);
+  console.log(`Search: ${searchValue}`);
+
+  if (searchValue === "") {
+    searchBar.setCustomValidity("Please enter cool music to search");
+    searchBar.reportValidity();
+  } else {
+    searchResults.replaceChildren();
+    getItunesData(searchValue);
+  }
+});
+
 function makeCard(song) {
   let card = document.createElement("div");
   card.classList.add("card", "col", "s12", "m9", "l4");
@@ -38,7 +55,7 @@ function makeCard(song) {
 
   card.addEventListener("click", function (event) {
     audioDiv.src = song.previewUrl;
-    nowPlay.innerHTML = `Now playing: "${song.trackName}" by ${song.artistName}`;
+    nowPlay.innerText = `Now playing: "${song.trackName}" by ${song.artistName}`;
   });
 }
 
@@ -56,28 +73,19 @@ function getItunesData(term) {
     })
     .then(function (data) {
       console.log(data);
-      for (let song of data.results) {
-        makeCard(song);
+      if (data.resultCount === 0) {
+        let noResults = document.createElement("p");
+        noResults.classList.add("noResults");
+        noResults.innerText = `No results found! 😞
+        Please search again.`;
+        searchResults.appendChild(noResults);
+      } else {
+        for (let song of data.results) {
+          makeCard(song);
+        }
       }
     })
     .catch(function (error) {
       console.log(error);
     });
 }
-
-page.addEventListener("submit", function (event) {
-  event.preventDefault();
-
-  const searchBar = document.querySelector("#search-bar");
-  const searchInput = searchBar.value;
-  const searchValue = encodeURIComponent(searchInput);
-  console.log(`Search: ${searchValue}`);
-
-  if (searchValue === "") {
-    searchBar.setCustomValidity("Please enter cool music to search");
-    searchBar.reportValidity();
-  } else {
-    searchResults.replaceChildren();
-    getItunesData(searchValue);
-  }
-});
