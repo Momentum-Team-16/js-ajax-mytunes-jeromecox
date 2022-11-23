@@ -77,8 +77,12 @@ function getItunesData(term) {
         let noResults = document.createElement("p");
         noResults.classList.add("noResults");
         noResults.innerText = `No results found! 😞
-        Please search again.`;
+      Please search again.`;
         searchResults.appendChild(noResults);
+        let losingHorn = document.createElement("audio");
+        searchResults.appendChild(losingHorn);
+        losingHorn.src = "";
+        losingHorn.autoplay = true;
       } else {
         for (let song of data.results) {
           makeCard(song);
