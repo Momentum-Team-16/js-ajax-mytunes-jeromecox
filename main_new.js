@@ -76,15 +76,12 @@ function getItunesData(term) {
     .then(function (data) {
       console.log(data);
       if (data.resultCount === 0) {
-        let noResults = document.createElement("p");
-        noResults.classList.add("noResults");
+        let noResults = createCardEl("p", ["noResults"], searchResults);
         noResults.innerText = `No results found! 😞
       Please search again.`;
-        searchResults.appendChild(noResults);
-        let losingHorn = document.createElement("audio");
-        searchResults.appendChild(losingHorn);
-        losingHorn.src = "The_Price_is_Right_Losing_Horn.mp3";
-        losingHorn.autoplay = true;
+        let horn = createCardEl("audio", "", searchResults);
+        horn.src = "The_Price_is_Right_Losing_Horn.mp3";
+        horn.autoplay = true;
       } else {
         for (let song of data.results) {
           makeCard(song);
