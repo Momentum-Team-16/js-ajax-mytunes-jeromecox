@@ -49,9 +49,6 @@ function makeCard(song) {
 
   searchResults.appendChild(card);
 
-  // let audioDiv = document.querySelector("#audio");
-  // let nowPlay = document.querySelector("#nowPlay");
-
   card.addEventListener("click", function (event) {
     musicPlayer.replaceChildren();
     let audioDiv = createCardEl("audio", ["audio"], musicPlayer);
