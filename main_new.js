@@ -30,8 +30,11 @@ function createCardEl(type, classArray, parent) {
 
 // Function to make a card given a song
 function makeCard(song) {
-  let card = document.createElement("div");
-  card.classList.add("card", "col", "s12", "m9", "l4");
+  let card = createCardEl(
+    "div",
+    ["card", "col", "s12", "m9", "l4"],
+    searchResults
+  );
 
   let pic = createCardEl("img", ["card-image"], card);
   pic.src = song.artworkUrl100;
