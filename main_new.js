@@ -1,19 +1,23 @@
 const searchForm = document.querySelector("#music-search");
+const searchBar = document.querySelector("#search-bar");
 const searchResults = document.querySelector("#search-results");
 const musicPlayer = document.querySelector("#music-player");
 
+// Form input submit
 searchForm.addEventListener("submit", function (event) {
   event.preventDefault();
 
-  const searchBar = document.querySelector("#search-bar");
-  const searchInput = searchBar.value;
-  const searchValue = encodeURIComponent(searchInput);
+  let searchInput = searchBar.value;
+  let searchValue = encodeURIComponent(searchInput);
   console.log(`Search: ${searchValue}`);
 
+  // Handles empty input submission
   if (searchValue === "") {
     searchBar.setCustomValidity("Please enter cool music to search");
     searchBar.reportValidity();
-  } else {
+  }
+  // Handles form input submission
+  else {
     searchResults.replaceChildren();
     musicPlayer.replaceChildren();
     getItunesData(searchValue);
@@ -35,20 +39,21 @@ function makeCard(song) {
     ["card", "col", "s12", "m9", "l4"],
     searchResults
   );
-
+  // Add album artwork to card
   let pic = createCardEl("img", ["card-image"], card);
   pic.src = song.artworkUrl100;
 
+  // Add track title to card
   let track = createCardEl("div", ["track-name"], card);
   let trackTitle = song.trackName;
   track.innerText = `"${trackTitle}"`;
 
+  // Add artist name to card
   let name = createCardEl("div", ["artist-name"], card);
   let artName = song.artistName;
   name.innerText = artName;
 
-  searchResults.appendChild(card);
-
+  // Create audio player for chosen (clicked) card
   card.addEventListener("click", function (event) {
     musicPlayer.replaceChildren();
     let audioDiv = createCardEl("audio", ["audio"], musicPlayer);
@@ -60,7 +65,7 @@ function makeCard(song) {
   });
 }
 
-// Function to fetch GET from iTunes API
+// Function fetch GET request from iTunes API
 function getItunesData(term) {
   let url =
     "https://itunes.apple.com/search?term=" + term + "&limit=24&entity=song";
